@@ -1,7 +1,7 @@
 pub mod p1;
 pub mod p2;
 
-pub(self) const PIECES: [([u8; 4], usize, usize); 5] = [
+const PIECES: [([u8; 4], usize, usize); 5] = [
     ([0x3c, 0, 0, 0], 4, 1),
     ([0x10, 0x38, 0x10, 0], 3, 3),
     ([0x38, 0x8, 0x8, 0], 3, 3),
@@ -10,7 +10,7 @@ pub(self) const PIECES: [([u8; 4], usize, usize); 5] = [
 ];
 
 #[derive(Debug, Clone)]
-pub(self) struct Board<'a> {
+struct Board<'a> {
     board: Vec<u8>,
     board_size: usize,
     num_rows_to_keep: usize,
@@ -24,7 +24,7 @@ pub(self) struct Board<'a> {
 }
 
 impl<'a> Board<'a> {
-    pub(self) fn new(size: usize, num_rows_to_keep: usize, directions: &'a [u8]) -> Board<'a> {
+    fn new(size: usize, num_rows_to_keep: usize, directions: &'a [u8]) -> Board<'a> {
         Self {
             board: vec![0; size],
             board_size: size,
@@ -39,13 +39,13 @@ impl<'a> Board<'a> {
         }
     }
 
-    pub(self) fn drop_pieces(&mut self, num_pieces: usize) {
+    fn drop_pieces(&mut self, num_pieces: usize) {
         for _ in 0..num_pieces {
             self.drop_piece()
         }
     }
 
-    pub(self) fn drop_piece(&mut self) {
+    fn drop_piece(&mut self) {
         let (mut cur_piece, width, height) = PIECES[self.piece_index];
         let mut x = 2;
         let mut y = self.max_height + 3;
@@ -110,10 +110,10 @@ impl<'a> Board<'a> {
         self.piece_index = (self.piece_index + 1) % PIECES.len();
     }
 
-    pub(self) fn total_height(&self) -> usize {
+    fn total_height(&self) -> usize {
         self.max_height + self.num_rows_trimmed
     }
 }
 
-pub(self) const BOARD_SIZE: usize = 4096;
-pub(self) const NUM_ROWS_TO_KEEP: usize = 1024;
+const BOARD_SIZE: usize = 4096;
+const NUM_ROWS_TO_KEEP: usize = 1024;

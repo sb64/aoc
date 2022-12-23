@@ -8,7 +8,7 @@ pub mod p1;
 pub mod p2;
 
 #[derive(Debug, Clone, Copy)]
-pub(self) struct Blueprint {
+struct Blueprint {
     id: u32,
     ore_robot_cost: u32,
     clay_robot_cost: u32,
@@ -16,7 +16,7 @@ pub(self) struct Blueprint {
     geode_robot_cost: (u32, u32),
 }
 
-pub(self) fn parse_blueprint(input: &str) -> IResult<&str, Blueprint> {
+fn parse_blueprint(input: &str) -> IResult<&str, Blueprint> {
     use nom::character::complete::u32;
     let (rem, id) = delimited(tag("Blueprint "), u32, tag(": "))(input)?;
     let (rem, ore_robot_cost) = delimited(tag("Each ore robot costs "), u32, tag(" ore. "))(rem)?;

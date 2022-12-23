@@ -12,7 +12,7 @@ pub mod p1;
 pub mod p2;
 
 #[derive(Debug, Clone)]
-pub(self) enum Monkey {
+enum Monkey {
     Num(i64),
     Operation {
         left: String,
@@ -22,14 +22,14 @@ pub(self) enum Monkey {
 }
 
 #[derive(Debug, Clone, Copy)]
-pub(self) enum Operator {
+enum Operator {
     Add,
     Subtract,
     Multipy,
     Divide,
 }
 
-pub(self) fn parse_monkey(input: &str) -> IResult<&str, (String, Monkey)> {
+fn parse_monkey(input: &str) -> IResult<&str, (String, Monkey)> {
     let (rem, name) = terminated(take(4_usize), tag(": "))(input)?;
     let name = name.to_string();
 
@@ -60,7 +60,7 @@ pub(self) fn parse_monkey(input: &str) -> IResult<&str, (String, Monkey)> {
     Ok((rem, (name, monkey)))
 }
 
-pub(self) fn calculate(
+fn calculate(
     monkey: impl AsRef<str>,
     calculated: &mut HashMap<String, i64>,
     monkeys: &HashMap<String, Monkey>,

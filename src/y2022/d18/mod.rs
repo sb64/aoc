@@ -15,7 +15,7 @@ fn parse_cube(input: &str) -> IResult<&str, (i32, i32, i32)> {
     tuple((i32, preceded(tag(","), i32), preceded(tag(","), i32)))(input)
 }
 
-pub(self) fn get_cubes(input: &str) -> eyre::Result<HashSet<(i32, i32, i32)>> {
+fn get_cubes(input: &str) -> eyre::Result<HashSet<(i32, i32, i32)>> {
     input
         .lines()
         .map(|line| {
