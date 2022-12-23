@@ -21,6 +21,54 @@ impl std::fmt::Display for Year {
 #[derive(Debug, Clone, Copy, clap::ValueEnum)]
 #[repr(u8)]
 enum Day {
+    #[value(id = "1")]
+    D1,
+
+    #[value(id = "2")]
+    D2,
+
+    #[value(id = "3")]
+    D3,
+
+    #[value(id = "4")]
+    D4,
+
+    #[value(id = "5")]
+    D5,
+
+    #[value(id = "6")]
+    D6,
+
+    #[value(id = "7")]
+    D7,
+
+    #[value(id = "8")]
+    D8,
+
+    #[value(id = "9")]
+    D9,
+
+    #[value(id = "10")]
+    D10,
+
+    #[value(id = "11")]
+    D11,
+
+    #[value(id = "12")]
+    D12,
+
+    #[value(id = "13")]
+    D13,
+
+    #[value(id = "14")]
+    D14,
+
+    #[value(id = "15")]
+    D15,
+
+    #[value(id = "16")]
+    D16,
+
     #[value(id = "17")]
     D17,
 
@@ -35,16 +83,48 @@ enum Day {
 
     #[value(id = "21")]
     D21,
+
+    #[value(id = "22")]
+    D22,
+
+    #[value(id = "23")]
+    D23,
+
+    #[value(id = "24")]
+    D24,
+
+    #[value(id = "25")]
+    D25,
 }
 
 impl std::fmt::Display for Day {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Self::D1 => write!(f, "1"),
+            Self::D2 => write!(f, "2"),
+            Self::D3 => write!(f, "3"),
+            Self::D4 => write!(f, "4"),
+            Self::D5 => write!(f, "5"),
+            Self::D6 => write!(f, "6"),
+            Self::D7 => write!(f, "7"),
+            Self::D8 => write!(f, "8"),
+            Self::D9 => write!(f, "9"),
+            Self::D10 => write!(f, "10"),
+            Self::D11 => write!(f, "11"),
+            Self::D12 => write!(f, "12"),
+            Self::D13 => write!(f, "13"),
+            Self::D14 => write!(f, "14"),
+            Self::D15 => write!(f, "15"),
+            Self::D16 => write!(f, "16"),
             Self::D17 => write!(f, "17"),
             Self::D18 => write!(f, "18"),
             Self::D19 => write!(f, "19"),
             Self::D20 => write!(f, "20"),
             Self::D21 => write!(f, "21"),
+            Self::D22 => write!(f, "22"),
+            Self::D23 => write!(f, "23"),
+            Self::D24 => write!(f, "24"),
+            Self::D25 => write!(f, "25"),
         }
     }
 }
