@@ -1,3 +1,9 @@
+use std::{
+    fs::{self, File},
+    io::{ErrorKind, Read, Write},
+    path::PathBuf,
+};
+
 use clap::Parser;
 use reqwest::{blocking::Client, header::COOKIE};
 
@@ -166,13 +172,63 @@ struct Args {
 }
 
 fn fetch_input(day: Day, year: Year) -> eyre::Result<String> {
+    let mut dir = None;
+    match fs::metadata("cached_input") {
+        Ok(metadata) => {
+            if metadata.is_dir() {
+                dir = Some(PathBuf::from("cached_input"));
+            }
+        }
+        Err(err) => {
+            if let ErrorKind::NotFound = err.kind() {
+                if let Ok(()) = std::fs::create_dir("cached_input") {
+                    dir = Some(PathBuf::from("cached_input"))
+                }
+            }
+        }
+    }
+
+    let mut file = None;
+    if let Some(mut path) = dir {
+        path.push(format!("y{year}d{day}.txt"));
+        match fs::metadata(&path) {
+            Ok(metadata) => {
+                if metadata.is_file() {
+                    if let Ok(mut opened_file) = File::open(&path) {
+                        let mut input = String::new();
+                        if let Ok(_) = opened_file.read_to_string(&mut input) {
+                            return Ok(input);
+                        }
+                    }
+                }
+            }
+            Err(err) => {
+                if let ErrorKind::NotFound = err.kind() {
+                    if let Ok(opened_file) = File::create(&path) {
+                        file = Some(opened_file);
+                    }
+                }
+            }
+        }
+    }
+
     const SESSION: &str = concat!("session=", include_str!("../session.txt"));
     let client = Client::new();
     let request = client
         .get(format!("https://adventofcode.com/{year}/day/{day}/input"))
         .header(COOKIE, SESSION)
         .build()?;
-    Ok(client.execute(request)?.text()?)
+    let mut input = client.execute(request)?.text()?;
+
+    while input.ends_with(&['\r', '\n']) {
+        let _ = input.pop();
+    }
+
+    if let Some(mut file) = file {
+        let _ = file.write_all(input.as_bytes());
+    }
+
+    Ok(input)
 }
 
 fn main() -> eyre::Result<()> {
