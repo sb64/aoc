@@ -188,20 +188,20 @@ fn main() -> eyre::Result<()> {
         None => fetch_input(day, year)?,
     };
 
-    print!("The solution for {year} day {day} {part} is ");
-    match (year, day, part) {
-        (Year::Y2022, Day::D17, Part::Part1) => println!("{}", y2022::d17::p1::solve(&input)?),
-        (Year::Y2022, Day::D17, Part::Part2) => println!("{}", y2022::d17::p2::solve(&input)?),
-        (Year::Y2022, Day::D18, Part::Part1) => println!("{}", y2022::d18::p1::solve(&input)?),
-        (Year::Y2022, Day::D18, Part::Part2) => println!("{}", y2022::d18::p2::solve(&input)?),
-        (Year::Y2022, Day::D19, Part::Part1) => println!("{}", y2022::d19::p1::solve(&input)?),
-        (Year::Y2022, Day::D19, Part::Part2) => println!("{}", y2022::d19::p2::solve(&input)?),
-        (Year::Y2022, Day::D20, Part::Part1) => println!("{}", y2022::d20::p1::solve(&input)?),
-        (Year::Y2022, Day::D20, Part::Part2) => println!("{}", y2022::d20::p2::solve(&input)?),
-        (Year::Y2022, Day::D21, Part::Part1) => println!("{}", y2022::d21::p1::solve(&input)?),
-        (Year::Y2022, Day::D21, Part::Part2) => println!("{}", y2022::d21::p2::solve(&input)?),
+    let answer: Box<dyn std::fmt::Display> = match (year, day, part) {
+        (Year::Y2022, Day::D17, Part::Part1) => Box::new(y2022::d17::p1::solve(&input)?),
+        (Year::Y2022, Day::D17, Part::Part2) => Box::new(y2022::d17::p2::solve(&input)?),
+        (Year::Y2022, Day::D18, Part::Part1) => Box::new(y2022::d18::p1::solve(&input)?),
+        (Year::Y2022, Day::D18, Part::Part2) => Box::new(y2022::d18::p2::solve(&input)?),
+        (Year::Y2022, Day::D19, Part::Part1) => Box::new(y2022::d19::p1::solve(&input)?),
+        (Year::Y2022, Day::D19, Part::Part2) => Box::new(y2022::d19::p2::solve(&input)?),
+        (Year::Y2022, Day::D20, Part::Part1) => Box::new(y2022::d20::p1::solve(&input)?),
+        (Year::Y2022, Day::D20, Part::Part2) => Box::new(y2022::d20::p2::solve(&input)?),
+        (Year::Y2022, Day::D21, Part::Part1) => Box::new(y2022::d21::p1::solve(&input)?),
+        (Year::Y2022, Day::D21, Part::Part2) => Box::new(y2022::d21::p2::solve(&input)?),
         _ => eyre::bail!("There is not yet a solution for that puzzle"),
-    }
+    };
+    println!("The solution for {year} day {day} {part} is {answer}");
 
     Ok(())
 }
