@@ -32,6 +32,9 @@ enum Day {
 
     #[value(id = "20")]
     D20,
+
+    #[value(id = "21")]
+    D21,
 }
 
 impl std::fmt::Display for Day {
@@ -41,6 +44,7 @@ impl std::fmt::Display for Day {
             Self::D18 => write!(f, "18"),
             Self::D19 => write!(f, "19"),
             Self::D20 => write!(f, "20"),
+            Self::D21 => write!(f, "21"),
         }
     }
 }
@@ -114,6 +118,8 @@ fn main() -> eyre::Result<()> {
         (Year::Y2022, Day::D19, Part::Part2) => println!("{}", y2022::d19::p2::solve(&input)?),
         (Year::Y2022, Day::D20, Part::Part1) => println!("{}", y2022::d20::p1::solve(&input)?),
         (Year::Y2022, Day::D20, Part::Part2) => println!("{}", y2022::d20::p2::solve(&input)?),
+        (Year::Y2022, Day::D21, Part::Part1) => println!("{}", y2022::d21::p1::solve(&input)?),
+        (Year::Y2022, Day::D21, Part::Part2) => println!("{}", y2022::d21::p2::solve(&input)?),
         _ => eyre::bail!("There is not yet a solution for that puzzle"),
     }
 
