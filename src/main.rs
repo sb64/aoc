@@ -255,6 +255,8 @@ fn main() -> eyre::Result<()> {
         (Year::Y2022, Day::D20, Part::Part2) => Box::new(y2022::d20::p2::solve(&input)?),
         (Year::Y2022, Day::D21, Part::Part1) => Box::new(y2022::d21::p1::solve(&input)?),
         (Year::Y2022, Day::D21, Part::Part2) => Box::new(y2022::d21::p2::solve(&input)?),
+        (Year::Y2022, Day::D22, Part::Part1) => Box::new(y2022::d22::p1::solve(&input)?),
+        (Year::Y2022, Day::D22, Part::Part2) => Box::new(y2022::d22::p2::solve(&input)?),
         _ => eyre::bail!("There is not yet a solution for that puzzle"),
     };
     println!("The solution for {year} day {day} {part} is {answer}");
