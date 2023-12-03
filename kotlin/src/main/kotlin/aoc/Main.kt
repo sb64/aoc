@@ -65,5 +65,7 @@ private fun getSolution(year: String, day: String, part: String, input: String):
         when (Triple(year, day, part)) {
             Triple("2023", "1", "1") -> aoc.y2023.d1.p1.solve(input)
             Triple("2023", "1", "2") -> aoc.y2023.d1.p2.solve(input)
+            Triple("2023", "2", "1") -> aoc.y2023.d2.p1.solve(input)
+            Triple("2023", "2", "2") -> aoc.y2023.d2.p2.solve(input)
             else -> "no solution is available"
         }
